@@ -117,6 +117,7 @@ class RegistrationsController extends AppController {
 		$this->request->data['Occasion']['title']=htmlspecialchars($this->request->data['Occasion']['title']);
 		$this->request->data['Occasion']['massage']=htmlspecialchars($this->request->data['Occasion']['massage']);
 		$this->request->data['Occasion']['type']=htmlspecialchars($this->request->data['Occasion']['type']);
+		$this->request->data['Occasion']['date']=date($this->request->data['Occasion']['date']);
 		$this->request->data['Occasion']['status']='Yes';
 
 		$error='';
