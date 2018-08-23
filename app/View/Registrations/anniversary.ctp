@@ -87,7 +87,7 @@
                                 <th scope="col">Day</th>
                                 <th colspan="col">Date</th>
                                 <th scope="col">Date of Anniversary</th>      
-                                 <th scope="col">Event</th>
+                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
