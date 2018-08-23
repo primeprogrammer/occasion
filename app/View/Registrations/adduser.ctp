@@ -71,7 +71,7 @@
                     </div>
                       <div class="form-group">
                     <label>Address</label>
-                      <?php echo $this->Form->input('address', array('type' => 'textarea','escape'=> false,'autofocus'=>'autofocus','class' => 'form-control',"title"=>"Fill your Address" ,'label'=>false,'required'=>'required')); ?>
+                      <?php echo $this->Form->input('address', array('type' => 'textarea','escape'=> false,'autofocus'=>'autofocus','class' => 'form-control','placeholder'=>"Fill your full Address","title"=>"Fill your Address" ,'label'=>false,'required'=>'required', 'rows' => '2', 'cols' => '8')); ?>
                     </div>
                     <div class="form-group">
                       <label>Date of Birth</label>

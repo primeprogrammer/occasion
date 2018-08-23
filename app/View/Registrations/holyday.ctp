@@ -115,11 +115,11 @@
                     </div>
                     <div class="form-group">
                       <label>Massage</label>
-                        <?php  echo $this->Form->input('massage',array('div'=>false,'label'=>false,'class' => 'form-control', 'placeholder' => 'Enter Your Own Massage','autofocus'=>'autofocus', 'type' => 'text','required'=>'required'));?>
+                        <?php  echo $this->Form->input('massage',array('div'=>false,'label'=>false,'class' => 'form-control', 'placeholder' => 'Enter Your Own Massage','autofocus'=>'autofocus', 'type' => 'textarea','required'=>'required','rows' => '1', 'cols' => '8'));?>
                     </div>
                     <div class="form-group">
                       <label>Festival Date</label>
-                        <?php  echo $this->Form->input('date',array('div'=>false,'label'=>false,'class' => 'form-control', 'placeholder' => 'Enter festival date','autofocus'=>'autofocus', 'type' => 'text','required'=>'required'));?>
+                        <?php  echo $this->Form->input('date',array('div'=>false,'label'=>false,'class' => 'form-control', 'placeholder' => 'Enter festival date','autofocus'=>'autofocus', 'type' => 'Date','required'=>'required'));?>
                     </div>
                    <div class="form-group">
                     <label>Type</label>
@@ -138,19 +138,31 @@
               </div>
 
                 <hr>
+
             <h4 class="tittle-w3-agileits mb-3">August</h4>
                         <ul class="event-list">
+               <?php foreach($allPublishedAuthors as $Authors): ?>           
 					     <li>
 					   <time datetime="2014-07-20">
-							<span class="day">15</span>
-							<span class="month">Aug</span>
-							<span class="year">2018</span>
-							<span class="time">ALL DAY</span>
+             
+							<span class="day">     <?php 
+               $data = $Authors['Occasion']['date'];
+              $nameOfDay = date('d', strtotime($data));
+              echo $nameOfDay;
+               ?></span>
+							<span class="month"><?php 
+               $data = $Authors['Occasion']['date'];
+              $nameOfDay = date('M', strtotime($data));
+              echo $nameOfDay; ?></span>
+							<span class="year"><?php 
+               $data = $Authors['Occasion']['date'];
+              $nameOfDay = date('Y', strtotime($data));
+              echo $nameOfDay; ?></span>
 						</time>
-						<img alt="Independence Day" src="/images/india.jpg" />
+						<img alt="Independence Day" src="/document/<?php echo $Authors['Occasion']['image']; ?>" />
 						<div class="info">
-							<h2 class="title">Independence Day</h2>
-							<p class="desc">India's Holiday</p>
+							<h2 class="title"><?php echo $Authors['Occasion']['title']; ?></h2>
+							<p class="desc"><?php echo $Authors['Occasion']['massage']; ?></p>
 							
 						<ul>							
 							<button class="btn btn-info my-2 my-sm-0" type="submit" data-toggle="modal" data-target="#myModal">Wish</button>
@@ -158,27 +170,9 @@
 						</div>
 						
 					</li>
-
-					<li>
-						<time datetime="2014-07-20 0000">
-							<span class="day">22</span>
-							<span class="month">Aug</span>
-							<span class="year">2018</span>
-							<span class="time">All Day</span>
-						</time>
-							<img alt="My 24th Birthday!" src="/images/eid.jpg" />
-						<div class="info">
-							<h2 class="title">Idul Juha</h2>
-							<p class="desc">India And Some Other Countries (Bakrid)</p>
-							
-							<ul>							
-							<button class="btn btn-info my-2 my-sm-0" type="submit" data-toggle="modal" data-target="#myModal">Wish</button>
-							</ul>
-						</div>
-						
-					</li>
-
-					<li>
+          <?php endforeach; ?>
+		
+	<!-- 				<li>
 						<time datetime="2014-07-20 2000">
 							<span class="day">26</span>
 							<span class="month">Aug</span>
@@ -194,9 +188,9 @@
 							</ul>
 						</div>
 						
-					</li>
+					</li> -->
 
-					<li>
+		<!-- 			<li>
 						<time datetime="2014-07-31 1600">
 							<span class="day">27</span>
 							<span class="month">Aug</span>
@@ -212,7 +206,7 @@
 							</ul>
 						</div>
 						
-					</li>
+					</li> -->
 				</ul>
                     </div>
                     <!--// Calender -->
