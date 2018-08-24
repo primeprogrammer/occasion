@@ -50,55 +50,57 @@ class RegistrationsController extends AppController {
    }
     
    public function sendsms(){
+   	$categories = $this->Registration->find('list',array('fields'=> array('Registration.id','Registration.contact_number')));
+   	$this->set(compact('categories'));
    	$categories[] = '';
    $categories = $this->Registration->find('all', array(
   'conditions' => array('DATE(Registration.dob)' => date('Y-m-d'))
   ));
-   echo $categories['name'];
-     die;
-   	$mobile=8795202855;//$data1['Customer']['contact_number'];
- $msgtocustomer ="Dear%20Sir%2FMadam%0aKindly%20deposit%20fixed%20EMI%20of%20this%20month.%0aPlot%20no%2E%2D".$data1['Plot']['plotno']."%0aArea%2D".$data1['Plot']['size']."%0aAmount%20Rs.".number_format($data1['Plot_book']['price'],2)."%0aRegards%0aPallavi InfraBuild Pvt Ltd%0a+(91)%2D8799315112";
+   // $this->set(compact('categories'));
+   	// $mobile=8795202855;
+ //   	$mobile=$data1['Customer']['contact_number'];
+ // $msgtocustomer ="Dear%20Sir%2FMadam%0aKindly%20deposit%20fixed%20EMI%20of%20this%20month.%0aPlot%20no%2E%2D".$data1['Plot']['plotno']."%0aArea%2D".$data1['Plot']['size']."%0aAmount%20Rs.".number_format($data1['Plot_book']['price'],2)."%0aRegards%0aPallavi InfraBuild Pvt Ltd%0a+(91)%2D8799315112";
 			
-		$authKey = "7c8f7aac3c921d0db54496697a11f841";
-					//Multiple mobiles numbers separated by comma
-					$mobileNumber = $mobile;
-					//Sender ID,While using route4 sender id should be 6 characters long.
-					$senderId = "PALAVI";
-					//Your message to send, Add URL encoding here.
-					$message = $msgtocustomer;
-					//Define route 
-					//pr($message); die;
-					$route = 1;
-					//Prepare you post parameters
-					$postData = array(
-						'authkey' => $authKey,
-						'mobiles' => $mobileNumber,
-						'message' => $message,
-						'sender' => $senderId,
-						'route' => $route
-					);
-					//API URL
-					$url = "http://pdsms.primeprogrammer.com/api/send_http.php";
-					// init the resource
-					$ch = curl_init();
-					curl_setopt_array($ch, array(
-						CURLOPT_URL => $url,
-						CURLOPT_RETURNTRANSFER => true,
-						CURLOPT_POST => true,
-						CURLOPT_POSTFIELDS => $postData
-						//,CURLOPT_FOLLOWLOCATION => true
-					));
-					//Ignore SSL certificate verification
-					curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-					curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-					//get response
-					$output = curl_exec($ch);
-					//Print error if any
-					if (curl_errno($ch)) {
-						echo 'error:' . curl_error($ch);
-					}
-					curl_close($ch);
-   	die;
+	// 	$authKey = "7c8f7aac3c921d0db54496697a11f841";
+	// 				//Multiple mobiles numbers separated by comma
+	// 				$mobileNumber = $mobile;
+	// 				//Sender ID,While using route4 sender id should be 6 characters long.
+	// 				$senderId = "PALAVI";
+	// 				//Your message to send, Add URL encoding here.
+	// 				$message = $msgtocustomer;
+	// 				//Define route 
+	// 				//pr($message); die;
+	// 				$route = 1;
+	// 				//Prepare you post parameters
+	// 				$postData = array(
+	// 					'authkey' => $authKey,
+	// 					'mobiles' => $mobileNumber,
+	// 					'message' => $message,
+	// 					'sender' => $senderId,
+	// 					'route' => $route
+	// 				);
+	// 				//API URL
+	// 				$url = "http://pdsms.primeprogrammer.com/api/send_http.php";
+	// 				// init the resource
+	// 				$ch = curl_init();
+	// 				curl_setopt_array($ch, array(
+	// 					CURLOPT_URL => $url,
+	// 					CURLOPT_RETURNTRANSFER => true,
+	// 					CURLOPT_POST => true,
+	// 					CURLOPT_POSTFIELDS => $postData
+	// 					//,CURLOPT_FOLLOWLOCATION => true
+	// 				));
+	// 				//Ignore SSL certificate verification
+	// 				curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+	// 				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+	// 				//get response
+	// 				$output = curl_exec($ch);
+	// 				//Print error if any
+	// 				if (curl_errno($ch)) {
+	// 					echo 'error:' . curl_error($ch);
+	// 				}
+	// 				curl_close($ch);
+   	// die;
    }
    public function birhtday(){
 

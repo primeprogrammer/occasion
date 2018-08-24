@@ -64,13 +64,15 @@
                       <input type="text" name="text" class="form-control" placeholder="Sender Id"><br> 
                     </div>
                     <div class="col-sm-12">
-                       <textarea placeholder="Mobile Numbers Comma Seperated" class="form-control"></textarea> 
+                   <?php  
+          echo $this->Form->input('contact_number',array('options' => $categories, 'empty'=>'--Mobile Numbers--','label'=>false, 'div'=>false,'class'=>'form-control')); ?>
+                      <!--  <textarea placeholder="Mobile Numbers Comma Seperated" class="form-control"></textarea>  -->
                     </div>
                 </div> 
               </div>
               <div class="col-sm-12 col-md-6">
-                   <textarea placeholder="message" class="form-control"></textarea>
-                <button type="submit" class="btn btn-primary my-3 px-5">Send SMS</button>
+                <textarea placeholder="message" class="form-control"></textarea>
+          <button type="submit" class="btn btn-primary my-3 px-5">Send SMS</button>
               </div>
             </div>
           </form>

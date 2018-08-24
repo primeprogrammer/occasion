@@ -71,12 +71,11 @@
                               <div class="text-center" style="color:  #0A895F">
                                 <?php echo $this->Flash->render(); ?>
                             </div>
-                      <div class="form-body-w3-agile text-left w-lg-50 w-sm-75 w-90 mx-auto mt-5">
-                        
-                                  
+    <div class="form-body-w3-agile text-left w-lg-50 w-sm-75 w-100 mx-auto mt-5">
+                
                        <div class="panel panel-primary">
                           <div class="panel-heading">
-                            <h3 class="panel-title text-center">Groups Form</h3>
+                            <h1 class="panel-title text-center">Groups Form</h1>
                           </div>
                           <div class="panel-body">
                       <?php echo $this->Form->create('Group'); ?>           
@@ -101,6 +100,7 @@
                         <tr>
                           <th>Sr no.</th>
                           <th>Group</th>
+                          <th>created</th>
                           <th>Action</th>    
                         </tr>
                       </thead>
@@ -109,7 +109,8 @@
                             <?php foreach($categories as $category): ?> 
                         <tr>
                           <td><?php echo $count; ?>.</td>
-                          <td><?php echo $category['Group']['group_title']; ?></td>
+                          <td><?php echo $category['Group']['group_title'];?></td>
+                          <td><?php echo $category['Group']['created'];?></td>
                           <td>
                             <?php echo $this->Html->link('<i class="fa fa-pencil-square-o" aria-hidden="true"></i> ',array('controller' => 'Registrations', 'action' => 'addgroup', $category['Group']['id']),array(
                                     'class'=>'btn btn-info','escape'=>false, 'confirm'=>'Are you sure, you want to edit?'));?>|| 
