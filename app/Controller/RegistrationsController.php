@@ -8,7 +8,7 @@ App::uses('File', 'Utility');
 class RegistrationsController extends AppController {
 
    public $components = array('Paginator','RequestHandler');
-   var $uses = array('Registration','Occasion');
+   var $uses = array('Registration','Occasion','Group');
    public $helpers = array('Tinymce','Html','Form');
 
     public function beforeFilter() {
@@ -162,9 +162,53 @@ class RegistrationsController extends AppController {
 
    }
    public function holydaylist(){
+
+   	 $Authors = $this->Occasion->find('all', array(
+        'conditions' => array('Occasion.status' => 'Yes')
+    ));
+   	 // pr($Authors);die;
+   	 $this->set(compact('Authors'));
    	
    }
+   public function addgroup($id=null){
 
+   	  if ($this->request->is('post') || $this->request->is('put')) {
+			// pr($this->request->data);die;
+			$this->request->data['Group']['group_title']=htmlspecialchars($this->request->data['Group']['group_title']);
+	     	$this->Group->create();
+			$this->request->data['Group']['id']=$this->request->data['Group']['id'];	
+			//pr($this->request->data);die;
+			if ($this->Group->save($this->request->data)) {
+				$this->Session->setFlash(__('The Group has been Save'));
+				$this->redirect(array('action' => 'addgroup', 'admin' => false));
+			} else {
+				$this->Session->setFlash(__('The Group could not be created. Please, try again.'));
+			}	
+        }
+     $this->Group->find('all');
+	 //  $this->paginate = array(
+		// 	'limit' => 10,
+		// 	'conditions'=>array('Group.id'=>$id)			
+		// );
+		 if(!empty($id)){   
+		    $category = $this->Group->findById($id);
+			$this->request->data = $category;
+			//pr($this->request->data);die;
+		 }
+	 	$categories = $this->paginate('Group');
+		// pr($categories);die;
+         //Configure::write("debug",2);
+	  	$this->set(compact('categories'));
+   }
+   public function deletegroup($id=null){
+
+   		$this->Group->id = $id;
+		if($this->Group->delete()){
+			$this->Session->setFlash('Group Moved');
+			$this->redirect(array('action'=>'addgroup', 'admin' => false));
+		}
+
+   }
     public function admin_addfile() {
 	$this->layout='admin';
      if ($this->request->is('post')) {

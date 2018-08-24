@@ -46,7 +46,7 @@
             <!--// top-bar -->
 
             <!-- main-heading -->
-            <h2 class="main-title-w3layouts mb-2 text-center">Holydays Months List</h2>
+            <h2 class="main-title-w3layouts mb-2 text-center">Holydays Months</h2>
             <!--// main-heading -->
 
             <!-- Inbox Page -->
@@ -80,18 +80,20 @@
                                   <ul>
 					     <li>					     
 							 <h4 class="tittle-w3-agileits mb-3">
-							 	<?php echo $this->Html->link(
-							    $this->Html->tag('span', '', array('class' => 'fa fa-arrow-circle-right')) . "August",
+                <?php foreach($allPublishedAuthors as $Authors): ?>
+
+							 	<?php
+                   $data = $Authors['Occasion']['date'];
+              $nameOfDay = date('F', strtotime($data));
+                          echo $this->Html->link(
+							    $this->Html->tag('span', '', array('class' => 'fa fa-arrow-circle-right')) . $nameOfDay,
 							    array('controller' => 'Registrations', 'action' => 'holydaylist'),
 							    array('class' => 'some other  classes', 'escape' => false)
 							); ?>
+              <?php endforeach; ?>   
 							 	</h4>						
 						</li>
-                            <h4 class="tittle-w3-agileits mb-3"><a href="holydays_list.html" >September  <i class="fa fa-arrow-circle-right"></i></a></h4>
-         					<li>						
-							</li>
-					
-				</ul>
+          </ul>
                               
                                 </div>
                             </div>
@@ -139,7 +141,10 @@
 
                 <hr>
 
-            <h4 class="tittle-w3-agileits mb-3">August</h4>
+            <h4 class="tittle-w3-agileits mb-3"><?php 
+               $data = $Authors['Occasion']['date'];
+              $nameOfDay = date('F', strtotime($data));
+              echo $nameOfDay; ?></h4>
                         <ul class="event-list">
                <?php foreach($allPublishedAuthors as $Authors): ?>           
 					     <li>
@@ -171,46 +176,9 @@
 						
 					</li>
           <?php endforeach; ?>
-		
-	<!-- 				<li>
-						<time datetime="2014-07-20 2000">
-							<span class="day">26</span>
-							<span class="month">Aug</span>
-							<span class="year">2018</span>
-							<span class="time">All Day</span>
-						</time>
-						<img alt="My 24th Birthday!" src="/images/bandhan.jpg" />
-						<div class="info">
-							<h2 class="title">Raksha Bandhan</h2>
-							<p class="desc">	Rakhi</p>
-							<ul>							
-							<button class="btn btn-info my-2 my-sm-0" type="submit" data-toggle="modal" data-target="#myModal">Wish</button>
-							</ul>
-						</div>
-						
-					</li> -->
-
-		<!-- 			<li>
-						<time datetime="2014-07-31 1600">
-							<span class="day">27</span>
-							<span class="month">Aug</span>
-							<span class="year">2018</span>
-							<span class="time">All Day</span>
-						</time>
-						<img alt="Disney Junior Live On Tour!" src="/images/shree.jpeg" />
-						<div class="info">
-							<h2 class="title">Sree Narayana Guru Jayanti</h2>
-							<p class="desc"> Kerala</p>
-							<ul>							
-							<button class="btn btn-info my-2 my-sm-0" type="submit" data-toggle="modal" data-target="#myModal">Wish</button>
-							</ul>
-						</div>
-						
-					</li> -->
-				</ul>
+			</ul>
                     </div>
-                    <!--// Calender -->
-                        </div>
+                         </div>
                     </div>
                 </div>
             </div>

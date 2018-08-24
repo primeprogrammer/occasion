@@ -86,20 +86,25 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Day</th>
                                 <th colspan="col">Date</th>
-                                <th scope="col">Date of Anniversary</th>      
+                                <th scope="col">Year of Anniversary</th>      
                                  <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                     <?php foreach($categories as $category): ?>
-                        <tr>
-                          <td><?php echo $category['Registration']['name']; ?></td>
-                         <td><?php  $category['Registration']['anniversary']; 
-                                echo date('D');
-                            ?></td>
-                         <td><?php echo $category['Registration']['anniversary']; ?></td>
-                        <td><?php 
-                           $count = count($category['Registration']['anniversary']);
+                 <tr>
+                    <td><?php echo $category['Registration']['name']; ?></td>
+                <td><?php 
+               $data = $category['Registration']['anniversary'];
+              $nameOfDay = date('D', strtotime($data));
+              echo $nameOfDay;
+               ?></td>
+                  <td><?php  $data = $category['Registration']['anniversary'];
+              $nameOfDay = date('d M y', strtotime($data));
+              echo $nameOfDay; ?></td>
+                    <td><?php 
+                        $data = $category['Registration']['anniversary'];
+                           $count = count(date('Y', strtotime($data)));
                                   echo $count .' Years'; ?></td>
                       <td>
                       <button class="btn btn-style my-2 my-sm-0" type="submit" data-toggle="modal" data-target="#myModal">Wish</button></td>

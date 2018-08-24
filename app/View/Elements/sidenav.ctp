@@ -61,6 +61,11 @@
     array('class' => 'some other  classes', 'escape' => false,'div'=>false));  ?>
                 </li>
               
-              
+                     <li>
+                    <?php echo $this->Html->link(
+    $this->Html->tag('span', '', array('class' => 'fa fa-object-group')) ."    Group ",
+    array('controller' => 'Registrations', 'action' => 'addgroup'),
+    array('class' => 'some other  classes', 'escape' => false,'div'=>false));  ?>
+                </li>
             </ul>
         </nav>

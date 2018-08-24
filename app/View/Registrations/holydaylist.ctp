@@ -43,14 +43,7 @@
                     </ul>
                 </div>
             </nav>
-            <!--// top-bar -->
-
-            <!-- main-heading -->
             <h2 class="main-title-w3layouts mb-2 text-center">Holydays Months List</h2>
-            <!--// main-heading -->
-
-            <!-- Inbox Page -->
-            <!-- Inbox topnav -->
             <nav class="inbox-nav-w3ls p-3 bg-dark text-white">
                 <div class="row">
                     <div class="inbox-topl col-6">
@@ -69,40 +62,34 @@
                    
                 </div>
             </nav>
-            <!-- Inbox topnav -->
-
-            <!-- Inbox content -->
-            <!--// Inbox content -->
             <div class="container-fluid">
                 <div class="row">
                     <div class="index-lcontent col-xl-4">
                         <div class="container-fluid">
                             <div class="row">
-                              <!-- right-strip -->
-                              
                                 <div class="email-list col-9">
                                   <h4 class="tittle-w3-agileits mb-3"></h4>
                                   <ul>
 					     <li>					     
-							 <h4 class="tittle-w3-agileits mb-3"><a href="holydays.html">August <i class="fa fa-arrow-circle-right"></i> </a></h4>						
+							 <h4 class="tittle-w3-agileits mb-3">
+                <?php foreach($Authors as $Author): ?>
+
+                <?php
+                   $data = $Author['Occasion']['date'];
+              $nameOfDay = date('F', strtotime($data));
+                          echo $this->Html->link(
+                  $this->Html->tag('span', '', array('class' => 'fa fa-arrow-circle-right')) . $nameOfDay,
+                  array('controller' => 'Registrations', 'action' => 'holydaylist'),
+                  array('class' => 'some other  classes', 'escape' => false)
+              ); ?>
+              <?php endforeach; ?> 
+              </h4>						
 							</li>
-                            <h4 class="tittle-w3-agileits mb-3"><a href="holydays_list.html" >September  <i class="fa fa-arrow-circle-right"></i></a></h4>
-         					<li>
-						
-					</li>
-
-					<li>
-						
-					</li>
-
-					<li>
-						
-					</li>
+                           				
 				</ul>
                               
                                 </div>
-                                <!-- right-strip -->
-                                
+                              
                             </div>
                         </div>
                     </div>
@@ -110,19 +97,32 @@
                         <div class="outer-w3-agile">
                              <!-- Calender -->
                     <div class="outer-w4-agile col-xl mt-3">
-                        <h4 class="tittle-w3-agileits mb-3">September</h4>
+                        <h4 class="tittle-w3-agileits mb-3"><?php 
+               $data = $Author['Occasion']['date'];
+              $nameOfDay = date('F', strtotime($data));
+              echo $nameOfDay; ?></h4>
                         <ul class="event-list">
+                          <?php foreach($Authors as $Author): ?>
 					     <li>
 					     	<time datetime="2014-07-20">
-							<span class="day">03</span>
-							<span class="month">Sep</span>
-							<span class="year">2018</span>
+							<span class="day"><?php 
+               $data = $Author['Occasion']['date'];
+              $nameOfDay = date('d', strtotime($data));
+              echo $nameOfDay; ?></span>
+							<span class="month"><?php 
+               $data = $Author['Occasion']['date'];
+              $nameOfDay = date('M', strtotime($data));
+              echo $nameOfDay; ?></span>
+							<span class="year"><?php 
+               $data = $Author['Occasion']['date'];
+              $nameOfDay = date('Y', strtotime($data));
+              echo $nameOfDay; ?></span>
 							<span class="time">ALL DAY</span>
 						</time>
-						<img alt="Independence Day" src="/images/india.jpg" />
+						<img alt="Independence Day" src="/document/<?php echo $Author['Occasion']['image']; ?>" />
 						<div class="info">
-							<h2 class="title">Independence Day</h2>
-							<p class="desc">India's Holiday</p>
+							<h2 class="title"><?php echo $Author['Occasion']['title']; ?></h2>
+							<p class="desc"><?php echo $Author['Occasion']['massage']; ?></p>
 							
 						<ul>							
 							<button class="btn btn-info my-2 my-sm-0" type="submit" data-toggle="modal" data-target="#myModal">Wish</button>
@@ -130,62 +130,8 @@
 						</div>
 						
 					</li>
-
-					<li>
-						<time datetime="2014-07-20 0000">
-							<span class="day">22</span>
-							<span class="month">Aug</span>
-							<span class="year">2018</span>
-							<span class="time">All Day</span>
-						</time>
-							<img alt="My 24th Birthday!" src="/images/eid.jpg" />
-						<div class="info">
-							<h2 class="title">Idul Juha</h2>
-							<p class="desc">India And Some Other Countries (Bakrid)</p>
-							
-							<ul>							
-							<button class="btn btn-info my-2 my-sm-0" type="submit" data-toggle="modal" data-target="#myModal">Wish</button>
-							</ul>
-						</div>
-						
-					</li>
-
-					<li>
-						<time datetime="2014-07-20 2000">
-							<span class="day">26</span>
-							<span class="month">Aug</span>
-							<span class="year">2018</span>
-							<span class="time">All Day</span>
-						</time>
-						<img alt="My 24th Birthday!" src="/images/bandhan.jpg" />
-						<div class="info">
-							<h2 class="title">Raksha Bandhan</h2>
-							<p class="desc">	Rakhi</p>
-							<ul>							
-							<button class="btn btn-info my-2 my-sm-0" type="submit" data-toggle="modal" data-target="#myModal">Wish</button>
-							</ul>
-						</div>
-						
-					</li>
-
-					<li>
-						<time datetime="2014-07-31 1600">
-							<span class="day">27</span>
-							<span class="month">Aug</span>
-							<span class="year">2018</span>
-							<span class="time">All Day</span>
-						</time>
-						<img alt="Disney Junior Live On Tour!" src="/images/shree.jpeg" />
-						<div class="info">
-							<h2 class="title">Sree Narayana Guru Jayanti</h2>
-							<p class="desc"> Kerala</p>
-							<ul>							
-							<button class="btn btn-info my-2 my-sm-0" type="submit" data-toggle="modal" data-target="#myModal">Wish</button>
-							</ul>
-						</div>
-						
-					</li>
-				</ul>
+            <?php endforeach; ?>
+			</ul>
                     </div>
                     <!--// Calender -->
                         </div>
