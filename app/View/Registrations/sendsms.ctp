@@ -65,7 +65,7 @@
                     </div>
                     <div class="col-sm-12">
                    <?php  
-          echo $this->Form->input('contact_number',array('options' => $categories, 'empty'=>'--Mobile Numbers--','label'=>false, 'div'=>false,'class'=>'form-control')); ?>
+          echo $this->Form->input('Registration.contact_number',array('options' => $categories, 'empty'=>'--Mobile Numbers--','label'=>false, 'div'=>false,'class'=>'form-control')); ?>
                       <!--  <textarea placeholder="Mobile Numbers Comma Seperated" class="form-control"></textarea>  -->
                     </div>
                 </div> 

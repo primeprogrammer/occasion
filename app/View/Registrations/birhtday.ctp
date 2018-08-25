@@ -86,81 +86,25 @@
 
                                 <div class="email-list col-9">
                                     <ul class="collection">
-                                     
+                              <?php  ?> 
                                         <li class="collection-item selected d-flex justify-content-between">
                                             <img src="/images/profile.jpg" alt="" class="img-fluid mr-3">
                                             <div class="mid-cn">
-                                                <span class="email-title">Andy Brown</span>
+            <span class="email-title"><?php //echo $task['Registration']['name']; ?></span>
                                                 <p class="paragraph-agileits-w3layouts">Turning 20 Years old.</p>
                                                   <form action="#" method="post" class="form-inline mx-auto search-form">
                         <input class="form-control mr-sm-2" type="search" placeholder="Write a birthday wish on his timeline.." aria-label="Search" title="Write a birthday wish on his timeline.." required="">
                         <button class="btn btn-style my-2 my-sm-0" type="submit">Send</button>
                     </form>
-                                            </div>
+                   </div>
                                             
-                                            <a href="#" class="email-time">
-                                                <i class="mdi-editor-attach-file attach-file"></i>
-                                                <small class="text-secondary">20 Nov 2018</small>
-                                            </a>
+                        <a href="#" class="email-time">
+                        <i class="mdi-editor-attach-file attach-file"></i>
+                        <small class="text-secondary">20 Nov 2018</small></a>
                                            
                                         </li>
-                                         <li class="collection-item selected d-flex justify-content-between">
-                                            <img src="/images/profile.jpg" alt="" class="img-fluid mr-3">
-                                            <div class="mid-cn">
-                                                <span class="email-title">Andy Brown</span>
-                                                <p class="paragraph-agileits-w3layouts">Turning 20 Years old.</p>
-                                                 <form action="#" method="post" class="form-inline mx-auto search-form">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Write a birthday wish on his timeline.." aria-label="Search" title="Write a birthday wish on his timeline.." required="">
-                        <button class="btn btn-style my-2 my-sm-0" type="submit">Send</button>
-                    </form>
-                                            </div>
-                                            <a href="#" class="email-time">
-                                                <i class="mdi-editor-attach-file attach-file"></i>
-                                                <small class="text-secondary">22 Dec 2018</small>
-                                            </a>
-                                        </li>
-                                         <li class="collection-item selected d-flex justify-content-between">
-                                            <img src="/images/profile.jpg" alt="" class="img-fluid mr-3">
-                                            <div class="mid-cn">
-                                                <span class="email-title">Andy Brown</span>
-                                                <p class="paragraph-agileits-w3layouts">Turning 20 Years old.</p>
-                                            <form action="#" method="post" class="form-inline mx-auto search-form">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Write a birthday wish on his timeline.." aria-label="Search" title="Write a birthday wish on his timeline.." required="">
-                        <button class="btn btn-style my-2 my-sm-0" type="submit">Send</button>
-                    </form> </div>
-                                            <a href="#" class="email-time">
-                                                <i class="mdi-editor-attach-file attach-file"></i>
-                                                <small class="text-secondary">12 Jan 2019</small>
-                                            </a>
-                                        </li>
-                                         <li class="collection-item selected d-flex justify-content-between">
-                                            <img src="/images/profile.jpg" alt="" class="img-fluid mr-3">
-                                            <div class="mid-cn">
-                                                <span class="email-title">Andy Brown</span>
-                                                <p class="paragraph-agileits-w3layouts">Turning 20 Years old.</p>
-                                            <form action="#" method="post" class="form-inline mx-auto search-form">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Write a birthday wish on his timeline.." aria-label="Search" title="Write a birthday wish on his timeline.." required="">
-                        <button class="btn btn-style my-2 my-sm-0" type="submit">Send</button>
-                    </form> </div>
-                                            <a href="#" class="email-time">
-                                                <i class="mdi-editor-attach-file attach-file"></i>
-                                                <small class="text-secondary">20 May 2019</small>
-                                            </a>
-                                        </li>
-                                         <li class="collection-item selected d-flex justify-content-between">
-                                            <img src="/images/profile.jpg" alt="" class="img-fluid mr-3">
-                                            <div class="mid-cn">
-                                                <span class="email-title">Andy Brown</span>
-                                                <p class="paragraph-agileits-w3layouts">Turning 20 Years old.</p>
-                                             <form action="#" method="post" class="form-inline mx-auto search-form">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Write a birthday wish on his timeline.." aria-label="Search" title="Write a birthday wish on his timeline.." required="">
-                        <button class="btn btn-style my-2 my-sm-0" type="submit">Send</button>
-                    </form></div>
-                                            <a href="#" class="email-time">
-                                                <i class="mdi-editor-attach-file attach-file"></i>
-                                                <small class="text-secondary">12:10 am</small>
-                                            </a>
-                                        </li>
+                                    <?php //endforeach; ?>
+
                                       
                                     </ul>
                                 </div>

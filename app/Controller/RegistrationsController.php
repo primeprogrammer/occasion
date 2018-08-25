@@ -8,7 +8,7 @@ App::uses('File', 'Utility');
 class RegistrationsController extends AppController {
 
    public $components = array('Paginator','RequestHandler');
-   var $uses = array('Registration','Occasion','Group');
+   var $uses = array('Registration','Occasion','Group','User');
    public $helpers = array('Tinymce','Html','Form');
 
     public function beforeFilter() {
@@ -31,11 +31,14 @@ class RegistrationsController extends AppController {
 
    public function adduser(){
    	$this->layout="admin";
+   	$group = $this->Group->find('list',array('fields'=> array('Group.id','Group.group_title')));
+   	$this->set(compact('group'));
    	 if ($this->request->is('post')) {
 		$this->Registration->create();
 			$this->request->data['Registration']['name']=htmlspecialchars($this->request->data['Registration']['name']);
 			$this->request->data['Registration']['email']=htmlspecialchars($this->request->data['Registration']['email']);
 			$this->request->data['Registration']['address']=htmlspecialchars($this->request->data['Registration']['address']);
+			$this->request->data['Registration']['group_id']=htmlspecialchars($this->request->data['Registration']['group_id']);
 			$this->request->data['Registration']['dob']=date('Y-m-d',strtotime($this->request->data['Registration']['dob']));
 			$this->request->data['Registration']['contact_number']=htmlspecialchars($this->request->data['Registration']['contact_number']);
 			$this->request->data['Registration']['anniversary']=date('Y-m-d',strtotime($this->request->data['Registration']['anniversary']));
@@ -52,17 +55,16 @@ class RegistrationsController extends AppController {
    public function sendsms(){
    	$categories = $this->Registration->find('list',array('fields'=> array('Registration.id','Registration.contact_number')));
    	$this->set(compact('categories'));
-   	$categories[] = '';
+   	
    $categories = $this->Registration->find('all', array(
   'conditions' => array('DATE(Registration.dob)' => date('Y-m-d'))
   ));
-   // $this->set(compact('categories'));
-   	// $mobile=8795202855;
+   $this->set(compact('categories'));
+ //   	$mobile=8795202855;
  //   	$mobile=$data1['Customer']['contact_number'];
  // $msgtocustomer ="Dear%20Sir%2FMadam%0aKindly%20deposit%20fixed%20EMI%20of%20this%20month.%0aPlot%20no%2E%2D".$data1['Plot']['plotno']."%0aArea%2D".$data1['Plot']['size']."%0aAmount%20Rs.".number_format($data1['Plot_book']['price'],2)."%0aRegards%0aPallavi InfraBuild Pvt Ltd%0a+(91)%2D8799315112";
 			
 	// 	$authKey = "7c8f7aac3c921d0db54496697a11f841";
-	// 				//Multiple mobiles numbers separated by comma
 	// 				$mobileNumber = $mobile;
 	// 				//Sender ID,While using route4 sender id should be 6 characters long.
 	// 				$senderId = "PALAVI";
@@ -104,6 +106,26 @@ class RegistrationsController extends AppController {
    }
    public function birhtday(){
 
+   	$TaskSuggestion = 
+	$this->Registration->find('all', array(
+   'conditions' => array(
+      'Registration.group_id' => $this->Session->read('Auth.User.group_id'),
+      'Registration.dob NOT' => null,
+      'AND' => array(
+           array('Registration.dob NOT' => null),
+           array('Registration.dob + INTERVAL EXTRACT(YEAR FROM NOW()) - 
+              EXTRACT(YEAR FROM Registration.dob) YEAR <=' => date('Y-m-d', 
+                 strtotime('+1 week'))),
+           array('Registration.dob + INTERVAL EXTRACT(YEAR FROM NOW()) -
+              EXTRACT(YEAR FROM Registration.dob) YEAR >=' => date('Y-m-d')),
+     		 )
+    		),
+  			 'order' => 'Registration.dob DESC'
+			)
+		);
+		 pr($TaskSuggestion);die;
+	$this->set(compact('TaskSuggestion'));
+  	
    }
    public function anniversary(){
    	  $categories = $this->Registration->find('all', array(
@@ -178,9 +200,8 @@ class RegistrationsController extends AppController {
 			// pr($this->request->data);die;
 			$this->request->data['Group']['group_title']=htmlspecialchars($this->request->data['Group']['group_title']);
 	     	$this->Group->create();
-			$this->request->data['Group']['id']=$this->request->data['Group']['id'];	
-			//pr($this->request->data);die;
-			if ($this->Group->save($this->request->data)) {
+		$this->request->data['Group']['id']=$this->request->data['Group']['id'];
+		if ($this->Group->save($this->request->data)) {
 				$this->Session->setFlash(__('The Group has been Save'));
 				$this->redirect(array('action' => 'addgroup', 'admin' => false));
 			} else {
@@ -188,18 +209,11 @@ class RegistrationsController extends AppController {
 			}	
         }
      $this->Group->find('all');
-	 //  $this->paginate = array(
-		// 	'limit' => 10,
-		// 	'conditions'=>array('Group.id'=>$id)			
-		// );
 		 if(!empty($id)){   
 		    $category = $this->Group->findById($id);
 			$this->request->data = $category;
-			//pr($this->request->data);die;
 		 }
 	 	$categories = $this->paginate('Group');
-		// pr($categories);die;
-         //Configure::write("debug",2);
 	  	$this->set(compact('categories'));
    }
    public function deletegroup($id=null){
