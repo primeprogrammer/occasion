@@ -8,7 +8,7 @@ App::uses('File', 'Utility');
 class RegistrationsController extends AppController {
 
    public $components = array('Paginator','RequestHandler');
-   var $uses = array('Registration','Occasion','Group','User');
+   var $uses = array('Registration','Occasion','Group','User','Alert');
    public $helpers = array('Tinymce','Html','Form');
 
     public function beforeFilter() {
@@ -53,66 +53,99 @@ class RegistrationsController extends AppController {
    }
     
    public function sendsms(){
-   	$categories = $this->Registration->find('list',array('fields'=> array('Registration.id','Registration.contact_number')));
-   	$this->set(compact('categories'));
+   	$numberlist = $this->Registration->find('list',array('fields'=> array('Registration.id','Registration.contact_number')));
+   	$this->set(compact('numberlist'));
    	
    $categories = $this->Registration->find('all', array(
   'conditions' => array('DATE(Registration.dob)' => date('Y-m-d'))
   ));
    $this->set(compact('categories'));
    // pr($categories);die;
-   foreach($categories as $data1):
-   	 $data = $data1['Registration']['dob'];
-              $nameOfDay = date('d', strtotime($data));
-              $check = date('d');
-              if($check == $nameOfDay){
+ //   foreach($categories as $data1):
+ //   	 $data = $data1['Registration']['dob'];
+ //              $nameOfDay = date('d', strtotime($data));
+ //              $check = date('d');
+ //              if($check == $nameOfDay){
        
-   	// $mobile=8795202855;
-   	$mobile=$data1['Registration']['contact_number'];
- $msgtocustomer ="Dear%20".$data1['Registration']['name']."%0aHappy %20birthday%20!%0aI%20hope%20all%20your%20birthday%20wishes%20and%20dreams%20come%20true."."%0aRegards%0aPallavi InfraBuild Pvt Ltd%0a+(91)%2D8799315112";
+ //   	// $mobile=8795202855;
+ //   	$mobile=$data1['Registration']['contact_number'];
+ // $msgtocustomer ="Dear%20".$data1['Registration']['name']."%0aHappy %20birthday%20!%0aI%20hope%20all%20your%20birthday%20wishes%20and%20dreams%20come%20true."."%0aRegards%0aPallavi InfraBuild Pvt Ltd%0a+(91)%2D8799315112";
 			
-		$authKey = "7c8f7aac3c921d0db54496697a11f841";
-					$mobileNumber = $mobile;
-					//Sender ID,While using route4 sender id should be 6 characters long.
-					$senderId = "PALAVI";
-					//Your message to send, Add URL encoding here.
-					$message = $msgtocustomer;
-					//Define route 
-					//pr($message); die;
-					$route = 1;
-					//Prepare you post parameters
-					$postData = array(
-						'authkey' => $authKey,
-						'mobiles' => $mobileNumber,
-						'message' => $message,
-						'sender' => $senderId,
-						'route' => $route
-					);
-					//API URL
-					$url = "http://pdsms.primeprogrammer.com/api/send_http.php";
-					// init the resource
-					$ch = curl_init();
-					curl_setopt_array($ch, array(
-						CURLOPT_URL => $url,
-						CURLOPT_RETURNTRANSFER => true,
-						CURLOPT_POST => true,
-						CURLOPT_POSTFIELDS => $postData
-						//,CURLOPT_FOLLOWLOCATION => true
-					));
-					//Ignore SSL certificate verification
-					curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-					curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-					//get response
-					$output = curl_exec($ch);
-					//Print error if any
-					if (curl_errno($ch)) {
-						echo 'error:' . curl_error($ch);
-					}
-					curl_close($ch);
-				}
-   	endforeach;
+	// 	$authKey = "7c8f7aac3c921d0db54496697a11f841";
+	// 				$mobileNumber = $mobile;
+	// 				//Sender ID,While using route4 sender id should be 6 characters long.
+	// 				$senderId = "PALAVI";
+	// 				//Your message to send, Add URL encoding here.
+	// 				$message = $msgtocustomer;
+	// 				//Define route 
+	// 				//pr($message); die;
+	// 				$route = 1;
+	// 				//Prepare you post parameters
+	// 				$postData = array(
+	// 					'authkey' => $authKey,
+	// 					'mobiles' => $mobileNumber,
+	// 					'message' => $message,
+	// 					'sender' => $senderId,
+	// 					'route' => $route
+	// 				);
+	// 				//API URL
+	// 				$url = "http://pdsms.primeprogrammer.com/api/send_http.php";
+	// 				// init the resource
+	// 				$ch = curl_init();
+	// 				curl_setopt_array($ch, array(
+	// 					CURLOPT_URL => $url,
+	// 					CURLOPT_RETURNTRANSFER => true,
+	// 					CURLOPT_POST => true,
+	// 					CURLOPT_POSTFIELDS => $postData
+	// 					//,CURLOPT_FOLLOWLOCATION => true
+	// 				));
+	// 				//Ignore SSL certificate verification
+	// 				curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+	// 				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+	// 				//get response
+	// 				$output = curl_exec($ch);
+	// 				//Print error if any
+	// 				if (curl_errno($ch)) {
+	// 					echo 'error:' . curl_error($ch);
+	// 				}
+	// 				curl_close($ch);
+	// 			}
+ //   	endforeach;
    }
    public function birhtday(){
+   $birth = $this->Registration->find('all', array(
+  'conditions' => array('DATE(Registration.dob)' => date('Y-m-d'))
+  ));
+   $this->set(compact('birth'));
+
+//    		# get pending alerts
+// $alerts = $this->Alert->find('all', array(
+//     'conditions' => array(
+//         'send_on <=' => date('Y-m-d H:i:s'),
+//         'status'     => 'pending',
+//     ),
+// ));
+// # send alerts
+// foreach ($alerts as $alert) {
+//     # send alert and update status
+//     $status = $this->Something->send($alert);
+//     $status = ($status) ? 'sent' : 'failed';
+//     $this->Alert->id = $alert['Alert']['id'];
+//     $this->Alert->saveField('status', $status);
+//     # generate and save next pending occurrence
+//     $this->Alert->create();
+//     $this->Alert->save(array('Alert' => array(
+//         'user_id'         => $alert['Alert']['user_id'],
+//         'status'          => 'pending',
+//         'send_on'         => strtotime($alert['Alert']['next_occurrence']),
+//         'next_occurrence' => $alert['Alert']['next_occurrence'],
+//     )));
+// }
+
+
+
+
+
 
    		 $categories = $this->Registration->find('all', array(
   'conditions' => array('DATE(Registration.dob)' => date('Y-m-d'))
@@ -179,12 +212,11 @@ class RegistrationsController extends AppController {
      foreach($categories as $data1):
    	 $data = $data1['Registration']['anniversary'];
               $nameOfDay = date('d', strtotime($data));
-              $check = date('d');
-              if($check == $nameOfDay){
+              if(date('d') == $nameOfDay){
        
    	// $mobile=8795202855;
    	$mobile=$data1['Registration']['contact_number'];
- $msgtocustomer ="Dear%20".$data1['Registration']['name']."%0aHappy %20birthday%20!%0aI%20hope%20all%20your%20birthday%20wishes%20and%20dreams%20come%20true."."%0aRegards%0aPallavi InfraBuild Pvt Ltd%0a+(91)%2D8799315112";
+ $msgtocustomer ="Dear%20".$data1['Registration']['name']."%20!%0aWishing%20a%20perfect%20pair%20a%20perfectly%20happy%20day."."%0aRegards%0aPallavi InfraBuild Pvt Ltd%0a+(91)%2D8799315112";
 			
 		$authKey = "7c8f7aac3c921d0db54496697a11f841";
 					$mobileNumber = $mobile;

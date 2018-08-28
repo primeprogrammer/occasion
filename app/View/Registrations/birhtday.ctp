@@ -86,12 +86,18 @@
 
                                 <div class="email-list col-9">
                                     <ul class="collection">
-                              <?php  ?> 
+                              <?php foreach($birth as $birthtask): ?> 
                                         <li class="collection-item selected d-flex justify-content-between">
                                             <img src="/images/profile.jpg" alt="" class="img-fluid mr-3">
                                             <div class="mid-cn">
-            <span class="email-title"><?php //echo $task['Registration']['name']; ?></span>
-                                                <p class="paragraph-agileits-w3layouts">Turning 20 Years old.</p>
+            <span class="email-title"><?php echo $birthtask['Registration']['name']; ?></span>
+                                                <p class="paragraph-agileits-w3layouts">
+                                                    <?php 
+                                                     $data = $birthtask['Registration']['dob'];
+                                  $nameOfDay = count(date('Y', strtotime($data)));
+                                  echo "Turning".$nameOfDay." Years old";
+
+                                                    ?></p>
                                                   <form action="#" method="post" class="form-inline mx-auto search-form">
                         <input class="form-control mr-sm-2" type="search" placeholder="Write a birthday wish on his timeline.." aria-label="Search" title="Write a birthday wish on his timeline.." required="">
                         <button class="btn btn-style my-2 my-sm-0" type="submit">Send</button>
@@ -100,10 +106,21 @@
                                             
                         <a href="#" class="email-time">
                         <i class="mdi-editor-attach-file attach-file"></i>
-                        <small class="text-secondary">20 Nov 2018</small></a>
+                        <small class="text-secondary"><?php 
+               $data = $birthtask['Registration']['dob'];
+              $namOfDay = date('F', strtotime($data));
+
+              $data = $birthtask['Registration']['dob'];
+              $namefDay = date('d', strtotime($data));
+
+              $data = $birthtask['Registration']['dob'];
+              $nameOfDa = date('Y', strtotime($data));
+            
+            
+              echo $namefDay.' '.$namOfDay.' '. $nameOfDa;  ?> </small></a>
                                            
                                         </li>
-                                    <?php //endforeach; ?>
+                                    <?php endforeach; ?>
 
                                       
                                     </ul>
